@@ -58,9 +58,60 @@ module.exports.setRouter = (app) => {
     app.post(`${baseUrl}/logout`, auth.isAuthorized, userController.logout);
 
     app.post(`${baseUrl}/recoverUserName`,userController.recoverUserName);
+        /**
+     * @apiGroup users
+     * @apiVersion  1.0.0
+     * @api {post} /api/v1/users/login api for user login.
+     *
+     * @apiParam {string} email email of the user. (body params) (required)
+     * @apiParam {string} password password of the user. (body params) (required)
+     *
+     * @apiSuccess {object} myResponse shows error status, message, http status code, result.
+     * 
+     * @apiSuccessExample {object} Success-Response:
+         {
+            "error": false,
+            "message": "Email sent Successful",
+            "status": 200,
+            "data": {
+                "authToken": "eyJhbGciOiJIUertyuiopojhgfdwertyuVCJ9.MCwiZXhwIjoxNTIwNDI29tIiwibGFzdE5hbWUiE4In19.hAR744xIY9K53JWm1rQ2mc",
+                "userDetails": {
+                "recover": password,
+                "email": "someone@mail.com",
+                
+            }
+
+        }
+    */
 
     app.post(`${baseUrl}/recoverPassword`,userController.recoverPassword);
+    
+        /**
+     * @apiGroup users
+     * @apiVersion  1.0.0
+     * @api {post} /api/v1/users/login api for user login.
+     *
+     * @apiParam {string} email email of the user. (body params) (required)
+     * @apiParam {string} password password of the user. (body params) (required)
+     *
+     * @apiSuccess {object} myResponse shows error status, message, http status code, result.
+     * 
+     * @apiSuccessExample {object} Success-Response:
+         {
+            "error": false,
+            "message": "Email sent Successful",
+            "status": 200,
+            "data": {
+                "authToken": "eyJhbGciOiJIUertyuiopojhgfdwertyuVCJ9.MCwiZXhwIjoxNTIwNDI29tIiwibGFzdE5hbWUiE4In19.hAR744xIY9K53JWm1rQ2mc",
+                "userDetails": {
+                "recover": password,
+                "email": "someone@mail.com",
+                
+            }
 
+        }
+    */
+    
     app.post(`${baseUrl}/resetPassword`,resetAuth.isAuthorized,userController.resetPassword);
 
 }

@@ -561,8 +561,8 @@ let recoverPassword = (req,res)=>{
              });
              let mailOptions = {
                from:'ToDo ShareBook Team',
-               //to:userDetails.userDetails.email,
-               to:'immanueljeosherinvj@gmail.com',
+               to:userDetails.userDetails.email,
+               
                subject:"Recover Password Request",
                html:`<h3>Hi ${userDetails.userDetails.firstName}</h3>
                <br><p>This mail is in request that you have requested for forgotten Password , Click the link below !</p>

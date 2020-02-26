@@ -19,7 +19,27 @@ const FriendModel = mongoose.model('Friend')
 // start sendReqFunction
 
 let sendReqFunction = (req, res) => {
-    
+    let validateSentReqwithFriend = () =>{
+        return new Promise((resolve,reject)=>{
+            FriendModel.findOne({$or:[
+                {$and:[{userId:req.body.userId},{friendReqId:req.body.friendReqId}]},
+                {$and:[{userId:req.body.friendReqId},{friendReqId:req.body.userId}]}
+            ]},(err,friendReqDetails)=>{
+            if(err){
+                logger.error('Failed to Retrieve Details','recoverController:findUser()',10)  
+                let apiResponse = response.generate(true, 'Failed To Find FriendReq Details', 500, null)
+                    reject(apiResponse)
+            }
+            else if(check.isEmpty(friendReqDetails)){
+                resolve();
+            }
+            else{
+                let apiResponse = response.generate(true,'You are already a friend !',302,null)
+                reject(apiResponse)
+            }
+        })
+        })
+    }
     let validateSentReq = () =>{
         return new Promise((resolve,reject)=>{
             FriendReqModel.findOne({$or:[
@@ -69,7 +89,8 @@ let sendReqFunction = (req, res) => {
             })
         })
     }
-    validateSentReq(req, res)
+    validateSentReqwithFriend(req, res)
+    .then(validateSentReq)
         .then((resolve) => {
             delete resolve.password
             let apiResponse = response.generate(false, 'User created', 200, resolve)
