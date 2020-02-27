@@ -48,7 +48,32 @@ module.exports.setRouter = (app) => {
     */
 
     app.post(`${baseUrl}/login`, userController.loginFunction);
+    
+        /**
+     * @apiGroup users
+     * @apiVersion  1.0.0
+     * @api {post} /api/v1/users/login api for user login.
+     *
+     * @apiParam {string} email email of the user. (body params) (required)
+     * @apiParam {string} password password of the user. (body params) (required)
+     *
+     * @apiSuccess {object} myResponse shows error status, message, http status code, result.
+     * 
+     * @apiSuccessExample {object} Success-Response:
+         {
+            "error": false,
+            "message": "Login sucessfull",
+            "status": 200,
+            "data": {
+                "authToken": "eyJhbGciOiJIUertyuiopojhgfdwertyuVCJ9.MCwiZXhwIjoxNTIwNDI29tIiwibGFzdE5hbWUiE4In19.hAR744xIY9K53JWm1rQ2mc",
+                "userDetails": {
+                
+                "email": "someone@mail.com",
+                "password":"jksmaddsk"
+            }
 
+        }
+    */    
     app.put(`${baseUrl}/:userId/edit`, auth.isAuthorized, userController.editUser);
 
     app.post(`${baseUrl}/:userId/delete`, auth.isAuthorized, userController.deleteUser);
@@ -104,7 +129,7 @@ module.exports.setRouter = (app) => {
             "data": {
                 "authToken": "eyJhbGciOiJIUertyuiopojhgfdwertyuVCJ9.MCwiZXhwIjoxNTIwNDI29tIiwibGFzdE5hbWUiE4In19.hAR744xIY9K53JWm1rQ2mc",
                 "userDetails": {
-                "recover": password,
+                "recover": userName,
                 "email": "someone@mail.com",
                 
             }
@@ -114,4 +139,29 @@ module.exports.setRouter = (app) => {
     
     app.post(`${baseUrl}/resetPassword`,resetAuth.isAuthorized,userController.resetPassword);
 
+        /**
+     * @apiGroup users
+     * @apiVersion  1.0.0
+     * @api {post} /api/v1/users/login api for user login.
+     *
+     * @apiParam {string} email email of the user. (body params) (required)
+     * @apiParam {string} password password of the user. (body params) (required)
+     *
+     * @apiSuccess {object} myResponse shows error status, message, http status code, result.
+     * 
+     * @apiSuccessExample {object} Success-Response:
+         {
+            "error": false,
+            "message": "Email sent Successful",
+            "status": 200,
+            "data": {
+                "authToken": "eyJhbGciOiJIUertyuiopojhgfdwertyuVCJ9.MCwiZXhwIjoxNTIwNDI29tIiwibGFzdE5hbWUiE4In19.hAR744xIY9K53JWm1rQ2mc",
+                "userDetails": {
+                "recover": password,
+                "email": "someone@mail.com",
+                
+            }
+
+        }
+    */
 }
